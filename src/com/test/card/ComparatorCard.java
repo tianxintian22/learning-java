@@ -6,7 +6,7 @@ public class ComparatorCard implements Comparator<Card>{
 
 	@Override
 	public int compare(Card o1, Card o2) {
-		String[] colors = {"ºìÌÒ", "ºÚÌÒ", "Ã·»¨", "·½Æ¬"};
+		String[] colors = {"é»‘æ¡ƒ", "çº¢æ¡ƒ", "æ¢…èŠ±", "æ–¹ç‰‡"};
 		int key1 = 0;
 		int key2 = 0;
 		for (int i = 0; i < colors.length; i++) {

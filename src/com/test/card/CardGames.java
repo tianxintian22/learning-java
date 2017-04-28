@@ -29,8 +29,8 @@ public class CardGames {
 	}
 
 	public void createCards() {
-		System.out.println("========´´½¨ÆË¿ËÅÆ=========");
-		String[] colors = {"ºìÌÒ", "ºÚÌÒ", "Ã·»¨", "·½Æ¬"};
+		System.out.println("========åˆ›å»ºæ‰‘å…‹ç‰Œ=========");
+		String[] colors = {"çº¢æ¡ƒ", "é»‘æ¡ƒ", "æ¢…èŠ±", "æ–¹ç‰‡"};
 		String[] points = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 
 		for (String color : colors) {
@@ -38,8 +38,8 @@ public class CardGames {
 				cardList.add(new Card(color, point));
 			}
 		}
-		System.out.println("========´´½¨ÆË¿ËÅÆ³É¹¦========");
-		System.out.print(cardList.size() + "ÕÅ£¬Îª£º[");
+		System.out.println("========åˆ›å»ºæ‰‘å…‹ç‰ŒæˆåŠŸ========");
+		System.out.print(cardList.size() + "å¼ ï¼Œä¸ºï¼š[");
 		for (Card card : cardList) {
 			System.out.print(card.getColor() + card.getPoint() + ",");
 		}
@@ -47,7 +47,7 @@ public class CardGames {
 	}
 
 	public void shuffleCards() {
-		System.out.println("========¿ªÊ¼Ï´ÅÆ=========");
+		System.out.println("========å¼€å§‹æ´—ç‰Œ=========");
 		Random random = new Random();
 		int cardsCount = cardList.size();
 		for (int i = 0; i < cardsCount; i++) {
@@ -55,8 +55,8 @@ public class CardGames {
 			cardList.remove(0);
 			cardList.add(random.nextInt(cardsCount), temp);
 		}
-		System.out.println("========Ï´ÅÆ½áÊø=========");
-		System.out.print(cardList.size() + "ÕÅ£¬Îª£º[");
+		System.out.println("========æ´—ç‰Œç»“æŸ=========");
+		System.out.print(cardList.size() + "å¼ ï¼Œä¸ºï¼š[");
 		for (Card card : cardList) {
 			System.out.print(card.getColor() + card.getPoint() + ",");
 		}
@@ -64,18 +64,18 @@ public class CardGames {
 	}
 	
 	public void createPlayer() {
-		System.out.println("========´´½¨Íæ¼Ò=========");
+		System.out.println("========åˆ›å»ºç©å®¶=========");
 		for (int i = 0; i < 2; i++) {
 			while (true){
 				try {
-					System.out.println("ÇëÊäÈëÍæ¼ÒID£º");
+					System.out.println("è¯·è¾“å…¥ç©å®¶IDï¼š");
 					int playerId = console.nextInt();
 					
 					if (playerList.contains(new Player(playerId, null))) {
 						throw new Exception();
 					}
 					
-					System.out.println("ÇëÊäÈëÍæ¼ÒĞÕÃû£º");
+					System.out.println("è¯·è¾“å…¥ç©å®¶å§“åï¼š");
 					String playerName = console.next();
 					
 					Player p1 = new Player(playerId, playerName);
@@ -83,35 +83,35 @@ public class CardGames {
 					break;
 				} catch (InputMismatchException  e) {
 					console = new Scanner(System.in);
-					System.out.println("ÇëÊäÈëÕûÊıÀàĞÍµÄID!");
+					System.out.println("è¯·è¾“å…¥æ•´æ•°ç±»å‹çš„ID!");
 				} catch (Exception e) {
-					System.out.println("¸ÃIDÒÑ´æÔÚ!");
+					System.out.println("è¯¥IDå·²å­˜åœ¨!");
 				}
 			}
 		}
 		for (Player player : playerList) {
-			System.out.println("========»¶Ó­Íæ¼Ò:" + player.getName() + "=========");
+			System.out.println("========æ¬¢è¿ç©å®¶:" + player.getName() + "=========");
 		}
 	}
 	
 	public void dealCards() {
-		System.out.println("========¿ªÊ¼·¢ÅÆ=========");
+		System.out.println("========å¼€å§‹å‘ç‰Œ=========");
 		int cardKey = 0;
 		for (int i = 0; i < 2; i++) {
 			for (Player player : playerList) {
 				Card c1 = cardList.get(cardKey);
 				player.getSelectCards().add(c1);
-				System.out.println("========Íæ¼Ò£º" +player.getName() + "ÄÃÅÆ," + c1.getColor() + c1.getPoint());
+				System.out.println("========ç©å®¶ï¼š" +player.getName() + "æ‹¿ç‰Œ," + c1.getColor() + c1.getPoint());
 				cardKey++;
 			}
 		}
-		System.out.println("========·¢ÅÆ½áÊø=========");
+		System.out.println("========å‘ç‰Œç»“æŸ=========");
 	}
 	
 	public void playGames() {
-		System.out.println("========¿ªÊ¼ÓÎÏ·=========");
+		System.out.println("========å¼€å§‹æ¸¸æˆ=========");
 		for (Player player : playerList) {
-			System.out.print("Íæ¼Ò£º" + player.getName() + "µÄÊÖÅÆÓĞ");
+			System.out.print("ç©å®¶ï¼š" + player.getName() + "çš„æ‰‹ç‰Œæœ‰");
 			for (Card card : player.getSelectCards()) {
 				System.out.print(card.getColor() + card.getPoint());
 			}
@@ -120,16 +120,16 @@ public class CardGames {
 			Card maxCard = player.getSelectCards().get(0);
 			compareList.add(maxCard);
 		}
-		//°´µãÅÅĞò
+		//æŒ‰ç‚¹æ’åº
 		Collections.sort(compareList);
-		//°´»¨É«ÅÅĞò
+		//æŒ‰èŠ±è‰²æ’åº
 		if (compareList.get(0).getPoint() == compareList.get(1).getPoint()) {
 			Collections.sort(compareList, new ComparatorCard());
 		}
 		Card finalMaxCard = compareList.get(0);
 		for (Player player : playerList) {
 			if (player.getSelectCards().contains(finalMaxCard)) {
-				System.out.println("========Íæ¼Ò£º" + player.getName() + "»ñÊ¤=========");
+				System.out.println("========ç©å®¶ï¼š" + player.getName() + "è·èƒœ=========");
 			}
 		}
 	}
