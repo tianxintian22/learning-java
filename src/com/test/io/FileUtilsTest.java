@@ -6,7 +6,7 @@ import java.io.IOException;
 public class FileUtilsTest {
 
 	public static void main(String[] args) throws IOException {
-		FileUtils.listDirectory(new File("E:\\code"));
+		FileUtils.listDirectory(new File("D:\\javaProgram"));
 	}
 
 }
