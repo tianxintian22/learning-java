@@ -1,6 +1,8 @@
 package com.test.io;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class IOUtils {
@@ -26,5 +28,24 @@ public class IOUtils {
 			i++;
 		}
 		in.close();
+	}
+	
+	public static void copyFile(File srcFile, File destFile) throws IOException {
+		if (!srcFile.exists()) {
+			throw new IllegalArgumentException("文件" + srcFile + "不存在");
+		}
+		if (!srcFile.isFile()) {
+			throw new IllegalArgumentException(srcFile + "不是文件");
+		}
+		FileInputStream in = new FileInputStream(srcFile);
+		FileOutputStream out = new FileOutputStream(destFile);
+		byte[] buf = new byte[10*1024];
+		int b;
+		while ((b = in.read(buf, 0, buf.length)) != -1) {
+			out.write(buf,0,b);
+		}
+		in.close();
+		out.close();
+		
 	}
 }
