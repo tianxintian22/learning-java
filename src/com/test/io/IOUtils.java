@@ -65,7 +65,12 @@ public class IOUtils {
 			}
 		}
 	}
-	
+	/**
+	 * 复制文件
+	 * @param srcFile 源文件
+	 * @param destFile 目标文件
+	 * @throws IOException
+	 */
 	public static void copyFile(File srcFile, File destFile) throws IOException {
 		if (!srcFile.exists()) {
 			throw new IllegalArgumentException("文件" + srcFile + "不存在");
@@ -79,8 +84,9 @@ public class IOUtils {
 		int b;
 		while ((b = in.read(buf, 0, buf.length)) != -1) {
 			out.write(buf,0,b);
+			out.flush();//最好加上，刷新此输出流并强制写出所有缓冲的输出字节。
 		}
 		in.close();
-		out.close();		
+		out.close();
 	}
 }
