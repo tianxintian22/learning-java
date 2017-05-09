@@ -1,5 +1,7 @@
 package com.test.io;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -66,7 +68,7 @@ public class IOUtils {
 		}
 	}
 	/**
-	 * 复制文件
+	 * 拷贝文件,字节批量读取
 	 * @param srcFile 源文件
 	 * @param destFile 目标文件
 	 * @throws IOException
@@ -86,6 +88,59 @@ public class IOUtils {
 			out.write(buf,0,b);
 			out.flush();//最好加上，刷新此输出流并强制写出所有缓冲的输出字节。
 		}
+		in.close();
+		out.close();
+	}
+	/**
+	 * 拷贝文件，利用带缓冲的字节流
+	 * @param srcFile
+	 * @param destFile
+	 * @throws IOException
+	 */
+	public static void copyFileByBuffer(File srcFile, File destFile) throws IOException {
+		if (!srcFile.exists()) {
+			throw new IllegalArgumentException("文件" + srcFile + "不存在");
+		}
+		if (!srcFile.isFile()) {
+			throw new IllegalArgumentException(srcFile + "不是文件");
+		}
+		FileInputStream in = new FileInputStream(srcFile);
+		FileOutputStream out = new FileOutputStream(destFile);
+		
+		BufferedInputStream bis = new BufferedInputStream(in);
+		BufferedOutputStream bos = new BufferedOutputStream(out);
+		
+		int c;
+		while ((c = bis.read()) != -1) {
+			bos.write(c);
+			bos.flush();
+		}
+		
+		bis.close();
+		bos.close();
+	}
+	/**
+	 * 拷贝文件，通过单字节读取
+	 * @param srcFile
+	 * @param destFile
+	 * @throws IOException
+	 */
+	public static void copyFileByByte(File srcFile, File destFile) throws IOException {
+		if (!srcFile.exists()) {
+			throw new IllegalArgumentException("文件" + srcFile + "不存在");
+		}
+		if (!srcFile.isFile()) {
+			throw new IllegalArgumentException(srcFile + "不是文件");
+		}
+		FileInputStream in = new FileInputStream(srcFile);
+		FileOutputStream out = new FileOutputStream(destFile);
+		
+		int c;
+		while ((c = in.read()) != -1) {
+			out.write(c);
+			out.flush();
+		}
+		
 		in.close();
 		out.close();
 	}
