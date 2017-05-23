@@ -29,8 +29,8 @@ public class Actor extends Thread {
 	
 	public static void main(String[] args) {
 		Thread actor = new Actor();
-		actor.start();
 		actor.setName("Mr.Thread");
+		actor.start();
 		
 		Thread actress = new Thread(new Actress(), "Mrs.Runnable");
 		actress.start();
