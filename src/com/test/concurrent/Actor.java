@@ -28,11 +28,11 @@ public class Actor extends Thread {
 	}
 	
 	public static void main(String[] args) {
-		Thread actor = new Actor();
+		Thread actor = new Actor();//actor 线程
 		actor.setName("Mr.Thread");
 		actor.start();
 		
-		Thread actress = new Thread(new Actress(), "Mrs.Runnable");
+		Thread actress = new Thread(new Actress(), "Mrs.Runnable");//actress 线程
 		actress.start();
 	}
 }
@@ -41,7 +41,7 @@ class Actress implements Runnable {
 
 	@Override
 	public void run() {
-		System.out.println(Thread.currentThread().getName() + "是一个演员！");
+		System.out.println(Thread.currentThread().getName() + "是一个演员啊！");
 		int count = 0;
 		boolean keepRunning = true;
 		while (keepRunning) {
