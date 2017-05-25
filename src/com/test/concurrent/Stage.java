@@ -8,6 +8,19 @@ package com.test.concurrent;
 public class Stage extends Thread {
 	
 	public void run() {
+		System.out.println("欢迎观看...");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		System.out.println("大戏正式开始");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		
 		//创建两支军队
 		ArmyRunnable armyTaskOfDynasty = new ArmyRunnable();
 		ArmyRunnable armyTaskOfRevolt = new ArmyRunnable();
@@ -27,14 +40,35 @@ public class Stage extends Thread {
 			e.printStackTrace();
 		}
 		
+		
+		System.out.println("正在激战，关键人物出场...");
+		
+		Thread MrCheng = new KeyPerson();
+		MrCheng.setName("程先生");
+		
+		//停止军队作战
+		//停止线程的方法
 		armyTaskOfDynasty.keepRunning = false;
 		armyTaskOfRevolt.keepRunning = false;
 		
 		try {
-			armyOfRevolt.join();
+			Thread.sleep(2000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		//关键人物进程执行
+		MrCheng.start();
+		
+		//所有线程等待程先生完成
+		try {
+			MrCheng.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
+		System.out.println("农民取得了胜利！");
+		
+		
 	}
 	
 	public static void main(String[] args) {
