@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class UserModel {
 	private Connection conn;
@@ -78,6 +79,80 @@ public class UserModel {
 				u = new Users();
 				u.setUser_name(rs.getString("user_name"));
 				u.setAge(rs.getInt("age"));
+				
+				user.add(u);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+	public List<Users> query(String name) {
+		List<Users> user = new ArrayList<Users>();
+		try {
+			StringBuffer strbuf = new StringBuffer();
+			strbuf.append("select * from test_users");
+			strbuf.append(" where user_name like ?");
+			
+			PreparedStatement ptmt = conn.prepareStatement(strbuf.toString());
+			ptmt.setString(1, "%" + name + "%");
+			ResultSet rs = ptmt.executeQuery();
+			
+			Users u = null;
+			while (rs.next()) {
+				u = new Users();
+				u.setId(rs.getInt("id"));
+				u.setUser_name(rs.getString("user_name"));
+				u.setAge(rs.getInt("age"));
+				u.setSex(rs.getInt("sex"));
+				u.setBirthday(rs.getDate("birthday"));
+				u.setEmail(rs.getString("email"));
+				u.setMobile(rs.getString("mobile"));
+				u.setCreate_date(rs.getDate("create_date"));
+				u.setCreate_user(rs.getString("create_user"));
+				u.setUpdate_date(rs.getDate("update_date"));
+				u.setUpdate_user(rs.getString("update_user"));
+				u.setIsdel(rs.getInt("isdel"));
+				
+				user.add(u);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+	public List<Users> query(List<Map<String, Object>> params) {
+		List<Users> user = new ArrayList<Users>();
+		try {
+			StringBuffer strbuf = new StringBuffer();
+			strbuf.append("select * from test_users where 1 = 1");
+			
+			if (params != null && params.size() >0) {
+				for (int i = 0; i < params.size(); i++) {
+					Map<String, Object> map = params.get(i);
+					strbuf.append(" and " + map.get("name") + map.get("rela") + map.get("value"));
+				}
+				
+			}
+			
+			PreparedStatement ptmt = conn.prepareStatement(strbuf.toString());
+			ResultSet rs = ptmt.executeQuery();
+			System.out.println(strbuf.toString());
+			Users u = null;
+			while (rs.next()) {
+				u = new Users();
+				u.setId(rs.getInt("id"));
+				u.setUser_name(rs.getString("user_name"));
+				u.setAge(rs.getInt("age"));
+				u.setSex(rs.getInt("sex"));
+				u.setBirthday(rs.getDate("birthday"));
+				u.setEmail(rs.getString("email"));
+				u.setMobile(rs.getString("mobile"));
+				u.setCreate_date(rs.getDate("create_date"));
+				u.setCreate_user(rs.getString("create_user"));
+				u.setUpdate_date(rs.getDate("update_date"));
+				u.setUpdate_user(rs.getString("update_user"));
+				u.setIsdel(rs.getInt("isdel"));
 				
 				user.add(u);
 			}

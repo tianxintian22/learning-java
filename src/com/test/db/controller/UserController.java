@@ -1,7 +1,10 @@
 package com.test.db.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.test.db.model.UserModel;
 import com.test.db.model.Users;
@@ -9,9 +12,22 @@ import com.test.db.model.Users;
 public class UserController {
 	public static void main(String[] args) {
 		UserModel userModel = new UserModel();
-		List<Users> users = userModel.query();
-		for (Users user : users) {
-			System.out.println(user.getUser_name() + "," + user.getAge());
+		//List<Users> users = userModel.query();
+		//List<Users> users = userModel.query("小");
+		List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("name", "user_name");
+		param.put("rela", "=");
+		param.put("value", "'小水'");
+		params.add(param);
+		param = new HashMap<String, Object>();
+		param.put("name", "create_date");
+		param.put("rela", "=");
+		param.put("value", "'2015-01-08'");
+		params.add(param);
+		List<Users> users = userModel.query(params);
+		for (int i = 0; i < users.size(); i++) {
+			System.out.println(users.get(i).toString());
 		}
 		
 		Users user = new Users();
@@ -31,8 +47,8 @@ public class UserController {
 		//userModel.addUser(user);
 		//userModel.updateUser(user);
 		//userModel.delUser(8);
-		Users user1 = userModel.get(2);
-		System.out.println(user1.toString());
+		//Users user1 = userModel.get(2);
+		//System.out.println(user1.toString());
 
 	}
 }
