@@ -26,7 +26,7 @@ public class RafDemo {
 		int i = 0x7fffffff;
 		raf.write(i >>> 24);//写入i的高八位
 		raf.write(i >>> 16);
-		raf.write(i >> 8);
+		raf.write(i >>> 8);
 		raf.write(i);
 		System.out.println(raf.getFilePointer());
 		//直接写入一个int

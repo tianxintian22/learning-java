@@ -14,9 +14,9 @@ public class ListTest {
 	/**
 	 * 用于存放备选课程的List
 	 */
-	public List coursesToSelect;
+	public List<Course> coursesToSelect;
 	public ListTest() {
-		this.coursesToSelect = new ArrayList();
+		this.coursesToSelect = new ArrayList<Course>();
 	}
 	
 	/**
@@ -57,7 +57,7 @@ public class ListTest {
 	}
 	
 	public void testIterator() {
-		Iterator it = coursesToSelect.iterator();
+		Iterator<Course> it = coursesToSelect.iterator();
 		System.out.println("有以下课程可以选择：");
 		while (it.hasNext()) {
 			Course c = (Course) it.next();

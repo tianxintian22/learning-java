@@ -26,7 +26,7 @@ public class UserModel {
 			ptmt.setString(1, u.getUser_name());
 			ptmt.setInt(2, u.getSex());
 			ptmt.setInt(3, u.getAge());
-			ptmt.setDate(4, new Date(u.getCreate_date().getTime()));
+			ptmt.setDate(4, new Date(u.getBirthday().getTime()));
 			ptmt.setString(5, u.getEmail());
 			ptmt.setString(6, u.getMobile());
 			ptmt.setString(7, u.getCreate_user());
@@ -74,11 +74,21 @@ public class UserModel {
 		Users u = null;
 		try {
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select user_name, age from test_users");
+			ResultSet rs = stmt.executeQuery("select * from test_users");
 			while (rs.next()) {
 				u = new Users();
+				u.setId(rs.getInt("id"));
 				u.setUser_name(rs.getString("user_name"));
 				u.setAge(rs.getInt("age"));
+				u.setSex(rs.getInt("sex"));
+				u.setBirthday(rs.getDate("birthday"));
+				u.setEmail(rs.getString("email"));
+				u.setMobile(rs.getString("mobile"));
+				u.setCreate_date(rs.getDate("create_date"));
+				u.setCreate_user(rs.getString("create_user"));
+				u.setUpdate_date(rs.getDate("update_date"));
+				u.setUpdate_user(rs.getString("update_user"));
+				u.setIsdel(rs.getInt("isdel"));
 				
 				user.add(u);
 			}
@@ -132,12 +142,10 @@ public class UserModel {
 					Map<String, Object> map = params.get(i);
 					strbuf.append(" and " + map.get("name") + map.get("rela") + map.get("value"));
 				}
-				
 			}
 			
 			PreparedStatement ptmt = conn.prepareStatement(strbuf.toString());
 			ResultSet rs = ptmt.executeQuery();
-			System.out.println(strbuf.toString());
 			Users u = null;
 			while (rs.next()) {
 				u = new Users();
