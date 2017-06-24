@@ -100,37 +100,5 @@ public class UserController {
 		//查询某个用户的信息：
 		Users user2 = control.get(8);
 		System.out.println("id为8的用户："+ user2.toString());
-		
-		
-		
-		
-		
-//		UserModel userModel = new UserModel();
-		//List<Users> users = userModel.query();
-		//List<Users> users = userModel.query("小");
-//		List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
-//		Map<String, Object> param = new HashMap<String, Object>();
-//		param.put("name", "user_name");
-//		param.put("rela", "=");
-//		param.put("value", "'小水'");
-//		params.add(param);
-//		param = new HashMap<String, Object>();
-//		param.put("name", "create_date");
-//		param.put("rela", "=");
-//		param.put("value", "'2015-01-08'");
-//		params.add(param);
-//		List<Users> users = userModel.query(params);
-//		for (int i = 0; i < users.size(); i++) {
-//			System.out.println(users.get(i).toString());
-//		}
-//		
-//		
-		
-		//userModel.addUser(user);
-		//userModel.updateUser(user);
-		//userModel.delUser(8);
-		//Users user1 = userModel.get(2);
-		//System.out.println(user1.toString());
-
 	}
 }
